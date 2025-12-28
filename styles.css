@@ -1112,4 +1112,15 @@ body {
   opacity: 1;
 }
 
+/* Certificates: View All toggle */
+.cert-toggle {
+  margin-top: 1.5rem;
+  display: flex;
+  justify-content: center;
+}
+
+.cert-hidden {
+  display: none !important;
+}
+
 

@@ -141,3 +141,43 @@ document.addEventListener('DOMContentLoaded', function() {
         setTimeout(typeWriter, 1000);
     }
 });
+
+document.addEventListener("DOMContentLoaded", () => {
+  const certSection = document.querySelector("#certificates");
+  if (!certSection) return;
+
+  const certCards = certSection.querySelectorAll(".cert-grid .cert-card");
+  const toggleBtn = document.getElementById("certToggleBtn");
+
+  const SHOW_COUNT = 6;
+  let expanded = false;
+
+  // If 6 or fewer, hide the button
+  if (!toggleBtn || certCards.length <= SHOW_COUNT) {
+    if (toggleBtn) toggleBtn.style.display = "none";
+    return;
+  }
+
+  // Hide all cards after first 6
+  certCards.forEach((card, index) => {
+    if (index >= SHOW_COUNT) card.classList.add("cert-hidden");
+  });
+
+  toggleBtn.addEventListener("click", () => {
+    expanded = !expanded;
+
+    certCards.forEach((card, index) => {
+      if (index >= SHOW_COUNT) {
+        card.classList.toggle("cert-hidden", !expanded);
+      }
+    });
+
+    toggleBtn.textContent = expanded ? "Show less" : "View all certificates";
+
+    // Optional: smooth scroll so user stays oriented
+    if (!expanded) {
+      certSection.scrollIntoView({ behavior: "smooth", block: "start" });
+    }
+  });
+});
+
